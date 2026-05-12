@@ -1,0 +1,24 @@
+.star {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  clip-path: polygon(50% 0%, 61% 28%, 90% 20%, 73% 46%, 100% 50%, 73% 54%, 90% 80%, 61% 72%, 50% 100%, 39% 72%, 10% 80%, 27% 54%, 0% 50%, 27% 46%, 10% 20%, 39% 28%);
+  transition: transform 0.15s ease, background 0.2s;
+  filter: drop-shadow(0 0 10px rgba(89,183,255,0.55));
+}
+
+.glow {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  background: radial-gradient(circle, rgba(89,183,255,0.14) 0%, rgba(89,183,255,0.04) 55%, transparent 70%);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  clip-path: polygon(50% 0%, 61% 28%, 90% 20%, 73% 46%, 100% 50%, 73% 54%, 90% 80%, 61% 72%, 50% 100%, 39% 72%, 10% 80%, 27% 54%, 0% 50%, 27% 46%, 10% 20%, 39% 28%);
+  transition: transform 0.2s ease;
+}

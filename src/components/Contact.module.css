@@ -1,0 +1,124 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.desc {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 1.4rem;
+  max-width: 560px;
+}
+
+.links {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.link {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.9rem;
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 212, 255, 0.32);
+}
+
+.linkIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  background: rgba(0, 212, 255, 0.09);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.linkLabel {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.linkVal {
+  font-size: 0.92rem;
+  color: var(--white);
+}
+
+.formTitle {
+  margin-bottom: 0.95rem;
+  font-size: 1.3rem;
+}
+
+.form {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.input,
+.textarea {
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: rgba(0, 2, 18, 0.8);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  outline: none;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--accent);
+}
+
+.submit {
+  margin-top: 0.4rem;
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  background: linear-gradient(135deg, var(--c2), var(--c4));
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.72rem 1rem;
+  transition: all 0.2s;
+}
+
+.submit:hover {
+  background: var(--accent);
+  color: #000108;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

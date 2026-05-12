@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap');
+
+:root {
+  --c1: #071b3d;
+  --c2: #0d3f88;
+  --c3: #061128;
+  --c4: #2e8dff;
+  --c5: #0d0d0d;
+  --deep: #0d0d0d;
+  --deeper: #090909;
+  --accent: #5fbaff;
+  --accent2: #93c4ff;
+  --white: #edf4ff;
+  --muted: rgba(212,226,247,0.56);
+  --card-bg: rgba(5, 12, 25, 0.7);
+  --card-border: rgba(75,131,204,0.14);
+  --radius: 16px;
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:
+  radial-gradient(circle at 18% 18%, rgba(75,131,204,0.08), transparent 28%),
+  radial-gradient(circle at 78% 12%, rgba(147,196,255,0.06), transparent 24%),
+  radial-gradient(circle at 50% 72%, rgba(31,103,194,0.07), transparent 30%),
+    linear-gradient(180deg, #050c18 0%, #030915 45%, #01040a 100%);
+  color:var(--white);font-family:var(--font-display);overflow-x:hidden;cursor:none;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--deeper);}
+::-webkit-scrollbar-thumb{background:rgba(75,131,204,0.22);border-radius:4px;}
+a{text-decoration:none;color:inherit;}
+button{cursor:none;font-family:inherit;}
+input,textarea{font-family:inherit;}
+
+.section-wrapper{padding:7rem 4rem;position:relative;z-index:2;max-width:1200px;margin:0 auto;}
+.section-label{font-family:var(--font-mono);font-size:.7rem;color:var(--accent2);letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem;}
+.section-label::before{content:'';width:28px;height:1px;background:linear-gradient(90deg,var(--accent2),var(--accent));flex-shrink:0;}
+.section-title{font-size:clamp(2rem,4vw,2.8rem);font-weight:800;line-height:1.1;margin-bottom:.6rem;}
+.section-sub{color:var(--muted);font-size:1.05rem;line-height:1.85;max-width:550px;margin-bottom:3.5rem;}
+.divider{border:none;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.18),rgba(147,196,255,0.12),transparent);position:relative;z-index:2;margin:5.5rem 0;}
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:768px){.section-wrapper{padding:5rem 1.5rem;}}

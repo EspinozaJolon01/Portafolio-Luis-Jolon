@@ -1,0 +1,142 @@
+export const SKILLS = {
+  languages: [
+    { name: 'Python',     image: 'python.png',     color: '#3776AB' },
+    { name: 'JavaScript', image: 'JS.png',         color: '#F7DF1E' },
+    { name: 'TypeScript', image: 'TS.png',         color: '#3178C6' },
+    { name: 'Node.js',    image: 'node.png',       color: '#339933' },
+  ],
+
+  databases: [
+    { name: 'PostgreSQL', image: 'postgresql.png', color: '#336791' },
+    { name: 'MySQL',      image: 'mysql.png',      color: '#00758F' },
+  ],
+
+  cloud_devops: [
+    { name: 'Docker',     image: 'docker.jpg', color: '#2496ED' },
+    { name: 'Linux',      image: 'linux.png',  color: '#FCC624' },
+    { name: 'AWS',        image: 'aws.png',    color: '#FF9900' },
+    { name: 'Azure',      image: 'azure.jpg',  color: '#0078D4' },
+  ],
+
+  tools: [
+    { name: 'Git',        image: 'git.png',    color: '#F05033', surface: '#FFFFFF' },
+  ],
+};
+
+export const PROJECTS = [
+  {
+    id: 1,
+    title_en: 'Project 2: Telecom Uno — National Networks & Global Link',
+    title_es: 'Proyecto 2: Telecom Uno, Redes Nacionales y Link Globa',
+    desc_en: 'Design and simulation in Cisco Packet Tracer of a national network interconnecting three ISPs via BGP, each with its own topologies, dynamic routing, redundancy, and services (DHCP/DNS/HTTP), meeting strict traffic and availability requirements.',
+    desc_es: 'Diseño y simulación en Cisco Packet Tracer de una red nacional que interconecta tres ISP mediante BGP, cada uno con topologías, protocolos dinámicos, redundancia y servicios DHCP/DNS/HTTP, cumpliendo estrictas reglas de tráfico y disponibilidad.',
+    long_en: 'This project involved designing and simulating a national network infrastructure in Cisco Packet Tracer that integrates three ISPs (Telecom Uno, Redes Nacionales and Conexiones Futuras), interconnected via BGP over fiber optics. Each ISP implemented its own topology (tree, hierarchical, hub-and-spoke) with dynamic routing protocols (OSPF, EIGRP), LACP redundancy and at least five routers and five hosts. Centralized services were configured: a global DHCP server hosted by Redes Nacionales and a DNS/HTTP server hosted by Telecom Uno under the domain www.Proyecto2_GrupoX.com. HSRP was applied for layer-3 high availability and a wireless router was included. All work was documented in a Git repository with a technical manual and a commercial presentation.',
+    long_es: 'El proyecto consistió en diseñar y simular en Cisco Packet Tracer una infraestructura de red nacional que integra tres ISP (Telecom Uno, Redes Nacionales y Conexiones Futuras), interconectados mediante BGP sobre fibra óptica. Cada ISP implementó su propia topología (árbol, jerárquica, hub‑n‑spoke) con protocolos dinámicos (OSPF, EIGRP), redundancia LACP y al menos 5 routers y 5 hosts. Se configuraron servicios centralizados: DHCP global desde Redes Nacionales y servidor DNS/HTTP desde Telecom Uno con el dominio www.Proyecto2_GrupoX.com. Además, se aplicó HSRP para alta disponibilidad en capa 3 y se incluyó un router inalámbrico. Todo se documentó en un repositorio Git con manual técnico y presentación comercial.',
+    tags: ['Cisco Packet Tracer (CLI)'],
+    github: 'https://github.com/EspinozaJolon01/REDES2_2S2025_G10',
+    features_en: ['/24 subnetting assigned per group', 'Redundant links and high availability (HSRP)', 'Centralized services: DNS/web on Telecom Uno, DHCP on Redes Nacionales', 'Traffic policies between departments'],
+    features_es: ['Subneteo de redes /24 asignadas por grupo', 'Enlaces redundantes y alta disponibilidad (HSRP)', 'Servidores centralizados: DNS/web en Telecom Uno, DHCP en Redes Nacionales', 'Reglas de tráfico entre departamentos'],
+  },
+  {
+    id: 2,
+    title_en: 'Processing and Exploratory Analysis of Massive Data in BigQuery',
+    title_es: 'Procesamiento y Análisis Exploratorio de Datos Masivos en BigQuery',
+    desc_en: 'Exploratory analysis of the public NYC Taxi Trips 2022 dataset (more than 100 million records) in Google BigQuery using advanced SQL, optimization with partitions and clustering, and predictive model training with BigQuery ML.',
+    desc_es: 'Análisis exploratorio del dataset público NYC Taxi Trips 2022 (más de 100M registros) en Google BigQuery mediante SQL avanzado, optimización con particiones y clustering, y entrenamiento de modelos predictivos con BigQuery ML.',
+    long_en: 'This project consisted of analyzing a massive taxi trips dataset from New York using BigQuery. SQL queries were developed to calculate descriptive metrics, temporal patterns, and categorical distributions. Date partitioning and location clustering were applied to reduce processing cost and time. At least two regression or classification models were trained and compared with BigQuery ML, evaluating metrics such as RMSE and the confusion matrix while correctly handling data leakage. The results and predictions were visualized in an interactive Looker Studio / Google Sheets dashboard, and the entire process was documented in a GitHub repository with a technical README.',
+    long_es: 'Proyecto que consistió en analizar un dataset masivo de viajes de taxi en Nueva York usando BigQuery. Se desarrollaron consultas SQL para calcular métricas descriptivas, patrones temporales y distribuciones categóricas. Se aplicaron particiones por fecha y clustering por ubicaciones para reducir costos y tiempo de procesamiento. Se entrenaron y compararon al menos dos modelos de regresión o clasificación con BigQuery ML, evaluando métricas como RMSE y matriz de confusión, manejando correctamente el data leakage. Los resultados y predicciones se visualizaron en un dashboard interactivo de Looker Studio / Google Sheets, y todo el proceso se documentó en un repositorio GitHub con README técnico.',
+    tags: ['SQL (BigQuery)', 'Google Cloud Platform ', 'Looker Studio'],
+    github: 'https://github.com/EspinozaJolon01/SS22S2026_202202182/tree/main/Proyecto2',
+    features_en: ['More than 100 million NYC 2022 taxi trip records', 'Training and evaluation of at least two models (regression/classification) with BigQuery ML', 'Partitioning and clustering to reduce processed bytes and costs'],
+    features_es: ['más de 100 millones de registros de viajes de taxi (NYC 2022)', 'entrenamiento y evaluación de al menos dos modelos (regresión/clasificación) con BigQuery ML.', 'implementación de particiones y clustering para reducir bytes procesados y costos.'],
+  },
+    {
+    id: 3,
+    title_en: 'MindLab - Emotional Analysis Platform with AI',
+    title_es: 'MindLab - Plataforma de Análisis Emocional con IA',
+    desc_en: 'Full-stack web application that analyzes audio to detect sentiment and provides personalized well-being recommendations through artificial intelligence.',
+    desc_es: 'Aplicación web full-stack que analiza audios para detectar sentimientos y proporciona recomendaciones personalizadas de bienestar mediante inteligencia artificial.',
+    long_en: 'MindLab is an integrated mental health platform that allows users to upload or record audio files that are processed through AWS services (Transcribe and Comprehend) for sentiment analysis. The application generates automatic transcriptions, detects the user\'s emotional state, and provides personalized recommendations. It includes a digital diary to record daily mood with tracking charts, an AI-powered chatbot (AWS Lex) for conversational support, and a complete secure authentication system with AWS Cognito.',
+    long_es: 'MindLab es una plataforma integrada de salud mental que permite a los usuarios cargar o grabar audios que son procesados mediante servicios de AWS (Transcribe y Comprehend) para análisis de sentimiento. La aplicación genera transcripciones automáticas, detecta el estado emocional del usuario y proporciona recomendaciones personalizadas. Incluye un diario digital para registrar el humor diario con gráficos de seguimiento, un chatbot impulsado por IA (AWS Lex) para soporte conversacional, y un sistema completo de autenticación seguro con AWS Cognito.',
+    tags: ['JavaScript ', 'PostgreSQL ', 'AWS (Transcribe, Comprehend, Lex, Cognito)'],
+    github: 'https://github.com/EspinozaJolon01/SEMI1_2S2025_PROYECTO_A_9',
+    features_en: ['Processes audio and detects emotions using machine learning', 'Intuitive interface for recording or uploading audio files', 'Records daily mood status with chart visualization', 'Integrated AI assistant for support and well-being recommendations'],
+    features_es: [' Procesa audios y detecta emociones mediante machine learning', 'Interfaz intuitiva para registrar o subir archivos de audio', 'Registra el estado de humor diario con visualización en gráficos', 'Asistente de IA integrado para soporte y recomendaciones de bienestar'],
+  },
+];
+
+export const I18N = {
+  en: {
+    // Nav
+    nav_about: 'About', nav_skills: 'Skills', nav_projects: 'Projects', nav_contact: 'Contact',
+    // Hero
+    hero_badge: 'Available for opportunities',
+    hero_name1: 'Luis', hero_name2: 'Jolón',
+    hero_role: 'Systems Engineering Student · USAC',
+    hero_desc: '10th semester student passionate about secure, scalable systems. Exploring the intersection of cybersecurity, databases, and DevOps.',
+    hero_cta1: 'View Projects', hero_cta2: 'Get in touch',
+    photo_hint: 'Add your photo here',
+    scroll_hint: 'Scroll',
+    // About
+    about_label: 'About Me', about_title: 'Who I Am',
+    about_p1: "I'm a Systems Engineering student in the final stage of my degree at USAC, Guatemala. I love learning and experimenting with technologies related to infrastructure, networks, backend development, and data analysis.",
+    about_p2: "I have worked on academic projects using tools such as Docker, Kubernetes, React, Go, and SQL, which has allowed me to become increasingly interested in areas like Cloud, DevOps, and cybersecurity.",
+    about_p3: "Outside of coding, I like to explore new tools, learn how the systems behind applications work, and continue improving my technical skills step by step.",
+    stat_semester: 'Semester', stat_projects: 'Projects', stat_areas: 'Focus Areas', stat_location: 'Location',
+    // Skills
+    skills_label: 'Skills', skills_title: 'Tech Stack',
+    skills_sub: 'Tools and technologies I work with.',
+    skills_cat_languages: 'Programming Languages',
+    skills_cat_databases: 'Databases',
+    skills_cat_cloud_devops: 'Cloud & DevOps',
+    skills_cat_tools: 'Tools',
+    // Projects
+    projects_label: 'Projects', projects_title: 'My Work',
+    projects_sub: "A selection of projects I've built. Click a card to learn more.",
+    btn_details: 'Details', btn_github: 'GitHub', btn_close: 'Close',
+    modal_features: 'Key Features',
+    // Contact
+    contact_label: 'Contact', contact_title: "Let's Connect",
+    contact_desc: 'Open to internships, collaborations, and conversations about tech.',
+    contact_email_lbl: 'Email', contact_email_val: 'jespinozajolon@gmail.com',
+    contact_li_val: 'https://linkedin.com/in/jluis-jolón',
+    contact_gh_val: 'https://github.com/EspinozaJolon01',
+    contact_form_title: 'Send a message',
+    form_name: 'Name', form_email: 'Email', form_msg: 'Message', form_send: 'Send message →',
+    // Footer
+    footer_by: 'Built with ♥ by', footer_uni: 'USAC · Guatemala',
+  },
+  es: {
+    nav_about: 'Acerca', nav_skills: 'Habilidades', nav_projects: 'Proyectos', nav_contact: 'Contacto',
+    hero_badge: 'Disponible para oportunidades',
+    hero_name1: 'Luis', hero_name2: 'Jolón',
+    hero_role: 'Estudiante de Ing. en Sistemas · USAC',
+    hero_desc: 'Estudiante de 10° semestre apasionado por sistemas seguros y escalables. Explorando ciberseguridad, bases de datos y DevOps.',
+    hero_cta1: 'Ver Proyectos', hero_cta2: 'Contáctame',
+    photo_hint: 'Agrega tu foto aquí',
+    scroll_hint: 'Desliza',
+    about_label: 'Sobre mí', about_title: 'Quién soy',
+    about_p1: 'Soy estudiante de Ingeniería en Sistemas en la etapa final de mi carrera en USAC, Guatemala. Me gusta aprender y experimentar con tecnologías relacionadas con infraestructura, redes, desarrollo backend y análisis de datos.',
+    about_p2: 'He trabajado en proyectos académicos utilizando herramientas como Docker, Kubernetes, React, Go y SQL, lo que me ha permitido interesarme cada vez más por áreas como Cloud, DevOps y ciberseguridad.',
+    about_p3: 'Fuera de programar, me gusta explorar nuevas herramientas, aprender cómo funcionan los sistemas detrás de las aplicaciones y seguir mejorando mis habilidades técnicas poco a poco.',
+    stat_semester: 'Semestre', stat_projects: 'Proyectos', stat_areas: 'Áreas de Enfoque', stat_location: 'Ubicación',
+    skills_label: 'Habilidades', skills_title: 'Stack Técnico',
+    skills_sub: 'Herramientas y tecnologías con las que trabajo.',
+    skills_cat_languages: 'Lenguajes de Programación',
+    skills_cat_databases: 'Bases de Datos',
+    skills_cat_cloud_devops: 'Nube y DevOps',
+    skills_cat_tools: 'Herramientas',
+    projects_label: 'Proyectos', projects_title: 'Mi Trabajo',
+    projects_sub: 'Una selección de proyectos que he construido. Haz clic en una tarjeta para saber más.',
+    btn_details: 'Detalles', btn_github: 'GitHub', btn_close: 'Cerrar',
+    modal_features: 'Características Clave',
+    contact_label: 'Contacto', contact_title: 'Conectemos',
+    contact_desc: 'Abierto a prácticas, colaboraciones y conversaciones sobre tecnología.',
+    contact_email_lbl: 'Correo', contact_email_val: 'jespinozajolon@gmail.com',
+    contact_li_val: 'https://linkedin.com/in/jluis-jolón',
+    contact_gh_val: 'https://github.com/EspinozaJolon01',
+    contact_form_title: 'Envía un mensaje',
+    form_name: 'Nombre', form_email: 'Correo', form_msg: 'Mensaje', form_send: 'Enviar mensaje →',
+    footer_by: 'Hecho con ♥ por', footer_uni: 'USAC · Guatemala',
+  },
+};
