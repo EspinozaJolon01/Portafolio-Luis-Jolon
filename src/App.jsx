@@ -29,7 +29,7 @@ export default function App() {
 			</main>
 			<footer className="section-wrapper" style={{ paddingTop: '2rem', paddingBottom: '2rem', textAlign: 'center' }}>
 				<p style={{ color: 'var(--muted)', fontFamily: 'var(--font-mono)', fontSize: '.72rem', letterSpacing: '.08em' }}>
-					{t('footer_by')} YOUR NAME · {t('footer_uni')}
+					{t('footer_by')} Jl · {t('footer_uni')}
 				</p>
 			</footer>
 		</>

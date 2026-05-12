@@ -104,7 +104,7 @@ export const I18N = {
     contact_form_title: 'Send a message',
     form_name: 'Name', form_email: 'Email', form_msg: 'Message', form_send: 'Send message →',
     // Footer
-    footer_by: 'Built with ♥ by', footer_uni: 'USAC · Guatemala',
+    footer_by: 'Effort shows in every project', footer_uni: 'USAC · Guatemala',
   },
   es: {
     nav_about: 'Acerca', nav_skills: 'Habilidades', nav_projects: 'Proyectos', nav_contact: 'Contacto',
@@ -137,6 +137,6 @@ export const I18N = {
     contact_gh_val: 'https://github.com/EspinozaJolon01',
     contact_form_title: 'Envía un mensaje',
     form_name: 'Nombre', form_email: 'Correo', form_msg: 'Mensaje', form_send: 'Enviar mensaje →',
-    footer_by: 'Hecho con ♥ por', footer_uni: 'USAC · Guatemala',
+    footer_by: 'El esfuerzo se refleja en cada proyecto', footer_uni: 'USAC · Guatemala',
   },
 };
