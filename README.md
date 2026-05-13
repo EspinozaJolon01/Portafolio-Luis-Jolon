@@ -3,4 +3,8 @@
 
 ## Luis Jolon
 
-#
+#El esfuerzo se refleja en cada proyecto
+
+
+
+
