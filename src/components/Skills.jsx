@@ -1,66 +1,89 @@
 import { useFadeIn } from '../hooks/useFadeIn';
 import { SKILLS } from '../data/content';
-import pythonImg from '../img/python.png';
-import jsImg from '../img/JS.png';
-import tsImg from '../img/TS.png';
-import nodeImg from '../img/node.png';
-import postgresqlImg from '../img/postgresql.png';
-import mysqlImg from '../img/mysql.png';
-import dockerImg from '../img/docker.jpg';
-import linuxImg from '../img/linux.png';
-import awsImg from '../img/aws.png';
-import azureImg from '../img/azure.jpg';
-import gitImg from '../img/git.png';
 import styles from './Skills.module.css';
 
-export default function Skills({ t }) {
-  const ref = useFadeIn(0);
+// Forma de cada constelación: posiciones (en % del panel) y líneas entre estrellas.
+// Si agregas más tecnologías que puntos, las nuevas se acomodan solas en un anillo.
+const SHAPES = {
+  languages: {
+    points: [[8, 20], [30, 34], [50, 18], [70, 36], [88, 58], [62, 76], [30, 70]],
+    edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 1]],
+  },
+  databases: {
+    points: [[14, 30], [62, 22], [40, 72]],
+    edges: [[0, 1], [1, 2], [2, 0]],
+  },
+  cloud_devops: {
+    points: [[8, 26], [24, 60], [44, 30], [58, 64], [80, 28], [86, 78]],
+    edges: [[0, 1], [1, 2], [2, 3], [3, 4], [3, 5]],
+  },
+  tools: {
+    points: [[12, 34], [40, 18], [56, 50], [30, 76]],
+    edges: [[0, 1], [1, 2], [2, 3], [3, 0]],
+  },
+};
 
-  const categories = {
-    languages: { label: t('skills_cat_languages') },
-    databases: { label: t('skills_cat_databases') },
-    cloud_devops: { label: t('skills_cat_cloud_devops') },
-    tools: { label: t('skills_cat_tools') },
-  };
+function layout(key, count) {
+  const shape = SHAPES[key] ?? { points: [], edges: [] };
+  const points = shape.points.slice(0, count);
+  for (let i = points.length; i < count; i++) {
+    const a = (i / count) * Math.PI * 2;
+    points.push([50 + Math.cos(a) * 34, 50 + Math.sin(a) * 30]);
+  }
+  const edges = shape.edges.filter(([a, b]) => a < count && b < count);
+  return { points, edges };
+}
 
-  const skillImages = {
-    'python.png': pythonImg,
-    'JS.png': jsImg,
-    'TS.png': tsImg,
-    'node.png': nodeImg,
-    'postgresql.png': postgresqlImg,
-    'mysql.png': mysqlImg,
-    'docker.jpg': dockerImg,
-    'linux.png': linuxImg,
-    'aws.png': awsImg,
-    'azure.jpg': azureImg,
-    'git.png': gitImg,
-  };
+function Constellation({ id, title, skills, index }) {
+  const ref = useFadeIn(index * 0.12, 0.3);
+  const { points, edges } = layout(id, skills.length);
 
   return (
-    <section id="skills">
-      <div className="section-wrapper" style={{ textAlign: 'center' }}>
-        <div className="section-label" style={{ justifyContent: 'center' }}>{t('skills_label')}</div>
-        <h2 className="section-title">{t('skills_title')}</h2>
-        <p className="section-sub" style={{ margin: '0 auto 1rem' }}>{t('skills_sub')}</p>
+    <figure ref={ref} className={styles.panel}>
+      <figcaption className={styles.panelTitle}>{title}</figcaption>
+      <div className={styles.chart}>
+        <svg className={styles.lines} viewBox="0 0 160 100" aria-hidden="true">
+          {edges.map(([a, b], i) => (
+            <line
+              key={`${a}-${b}`}
+              x1={points[a][0] * 1.6} y1={points[a][1]}
+              x2={points[b][0] * 1.6} y2={points[b][1]}
+              pathLength="1"
+              style={{ transitionDelay: `${0.25 + i * 0.12}s` }}
+            />
+          ))}
+        </svg>
+        <ul className={styles.stars}>
+          {skills.map((name, i) => {
+            const [x, y] = points[i];
+            return (
+              <li
+                key={name}
+                className={`${styles.star} ${x > 72 ? styles.labelLeft : ''}`}
+                style={{ left: `${x}%`, top: `${y}%`, transitionDelay: `${i * 0.08}s` }}
+              >
+                <span className={styles.dot} aria-hidden="true" />
+                <span className={styles.label}>{name}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </figure>
+  );
+}
 
-        <div ref={ref} className="fade-in">
-          {Object.entries(SKILLS).map(([key, skillList]) => (
-            <div key={key} className={styles.category}>
-              <div className={styles.categoryTitle}>
-                {categories[key]?.label}
-              </div>
-              <div className={styles.grid}>
-                {skillList.map((s, i) => (
-                  <div key={s.name} className={styles.card} style={{ animationDelay: `${i * 0.06}s` }}>
-                    <div className={styles.icon} style={{ backgroundColor: s.surface || s.color }}>
-                      <img className={styles.iconImage} src={skillImages[s.image]} alt={s.name} loading="lazy" />
-                    </div>
-                    <div className={styles.name}>{s.name}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+export default function Skills({ t }) {
+  return (
+    <section id="skills">
+      <div className="section-wrapper">
+        <p className="section-label">{t('skills_label')}</p>
+        <h2 className="section-title">{t('skills_title')}</h2>
+        <p className="section-sub">{t('skills_sub')}</p>
+
+        <div className={styles.sky}>
+          {Object.entries(SKILLS).map(([key, list], i) => (
+            <Constellation key={key} id={key} index={i} title={t(`skills_cat_${key}`)} skills={list} />
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
 .hero {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,31 +23,6 @@
 /* TEXT */
 .text { flex: 1; max-width: 600px; }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--accent2);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  border: 1px solid rgba(0, 255, 204, 0.22);
-  border-radius: 100px;
-  padding: 0.35rem 1rem;
-  margin-bottom: 2rem;
-}
-.badgeDot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--accent2);
-  animation: pulse 2.2s ease-in-out infinite;
-  flex-shrink: 0;
-}
-@keyframes pulse {
-  0%,100% { opacity:1; transform:scale(1); }
-  50% { opacity:0.35; transform:scale(0.65); }
-}
 
 .name {
   font-size: clamp(3.4rem, 8vw, 6.2rem);
@@ -55,16 +31,15 @@
   letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
 }
+.nameLine1, .nameLine2 { display: block; }
 .nameLine1 { color: var(--white); }
 .nameLine2 {
-  background: linear-gradient(90deg, var(--accent), var(--accent2), #7090ff, var(--accent));
-  background-size: 250%;
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent2) 55%, var(--moon) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 5s linear infinite;
+  padding-bottom: 0.08em;
 }
-@keyframes shimmer { 0%{background-position:0%} 100%{background-position:250%} }
 
 .role {
   font-family: var(--font-mono);
@@ -74,73 +49,45 @@
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  letter-spacing: 0.05em;
-  font-weight: 500;
+  letter-spacing: 0.04em;
 }
 .roleArrow { color: var(--accent); }
 
 .desc {
   font-size: 1.08rem;
-  line-height: 1.9;
+  line-height: 1.85;
   color: var(--muted);
   max-width: 520px;
-  margin-bottom: 2.8rem;
-  letter-spacing: 0.2px;
+  margin-bottom: 2.6rem;
 }
 
 .cta {
   display: flex;
-  gap: 1rem;
+  gap: 0.9rem;
   flex-wrap: wrap;
 }
 
-.btnPrimary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  background: linear-gradient(135deg, var(--c2), var(--c4));
-  border: 1.5px solid var(--accent);
-  color: var(--white);
-  padding: 0.92rem 2rem;
-  border-radius: 100px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
-}
-.btnPrimary:hover {
-  background: var(--accent);
-  color: #000108;
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,212,255,0.25);
-}
 
-.btnGhost {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  background: transparent;
-  border: 1.5px solid rgba(0,212,255,0.35);
-  color: var(--muted);
-  padding: 0.92rem 2rem;
-  border-radius: 100px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
+/* LUNA DE HOY */
+.moon {
+  margin-top: 2.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.14);
+  max-width: 420px;
 }
-.btnGhost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: rgba(0,212,255,0.05);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,212,255,0.15);
+.moonLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--faint);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.2rem;
+}
+.moonValue {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--accent2);
 }
 
 /* PHOTO */
@@ -157,96 +104,77 @@
   position: absolute;
   inset: -50px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(168,140,255,0.1) 0%, transparent 66%);
-  animation: glowPulse 4s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.12) 0%, transparent 66%);
 }
-@keyframes glowPulse { 0%,100%{opacity:.5} 50%{opacity:1} }
 
-.orbit1 {
+.orbit1,
+.orbit2,
+.orbitTrack {
   position: absolute;
-  inset: -28px;
   border-radius: 50%;
-  border: 1px solid rgba(168,140,255,0.14);
-  animation: spinOrbit 22s linear infinite;
+}
+.orbit1 {
+  inset: -28px;
+  border: 1px solid rgba(var(--accent-rgb), 0.18);
 }
 .orbit2 {
-  position: absolute;
-  inset: -52px;
-  border-radius: 50%;
-  border: 1px dashed rgba(216,140,255,0.08);
-  animation: spinOrbit 36s linear infinite reverse;
+  inset: -56px;
+  border: 1px dashed rgba(var(--moon-rgb), 0.12);
+  animation: spinOrbit 60s linear infinite reverse;
 }
-@keyframes spinOrbit { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-
+.orbitTrack {
+  inset: -28px;
+  animation: spinOrbit 24s linear infinite;
+}
 .orbitDot {
   position: absolute;
+  top: -5px;
+  left: calc(50% - 5px);
   width: 10px; height: 10px;
   border-radius: 50%;
-  background: var(--accent2);
-  box-shadow: 0 0 10px var(--accent2), 0 0 20px rgba(168,140,255,0.28);
-  top: calc(50% - 5px - 152px);
-  left: calc(50% - 5px);
-  transform-origin: 5px 157px;
-  animation: spinOrbit 22s linear infinite;
+  background: var(--moon);
+  box-shadow: 0 0 10px rgba(var(--moon-rgb), 0.9), 0 0 22px rgba(var(--moon-rgb), 0.35);
 }
+@keyframes spinOrbit { to { transform: rotate(360deg); } }
 
 .frame {
   width: 300px; height: 300px;
   border-radius: 50%;
   overflow: hidden;
-  border: 1px solid rgba(168,140,255,0.18);
-  background: rgba(8, 4, 18, 0.42);
-  backdrop-filter: blur(14px);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.03) inset,
-    0 20px 50px rgba(0,0,0,0.28);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid rgba(var(--accent-rgb), 0.22);
+  background: rgba(5, 10, 22, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
   position: relative;
   z-index: 1;
 }
-
-.placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  color: rgba(240,232,255,0.72);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  text-align: center;
-  padding: 1rem;
-  letter-spacing: 0.08em;
-}
+.frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* SCROLL HINT */
 .scrollHint {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.45rem;
-  color: var(--muted);
+  color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.64rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  animation: floatY 2.8s ease-in-out infinite;
+  transition: color 0.2s;
 }
-@keyframes floatY {
-  0%,100%{transform:translateX(-50%) translateY(0)}
-  50%{transform:translateX(-50%) translateY(10px)}
-}
+.scrollHint:hover { color: var(--white); }
 
 @media (max-width: 900px) {
-  .hero { padding: 0 1.5rem; }
-  .content { flex-direction: column-reverse; gap: 2.5rem; padding-top: 7rem; align-items: flex-start; }
-  .photoWrap { width: 200px; height: 200px; }
-  .photoWrap { margin-left: 0; transform: translateX(0) rotate(0deg); }
-  .frame { width: 200px; height: 200px; }
-  .orbitDot { top: calc(50% - 5px - 102px); transform-origin: 5px 107px; }
+  .hero { padding: 0 1.25rem; }
+  .content { flex-direction: column-reverse; gap: 3rem; padding-top: 7rem; padding-bottom: 6rem; align-items: flex-start; }
+  .photoWrap { width: 180px; height: 180px; margin: 0 0 0 28px; transform: none; }
+  .frame { width: 180px; height: 180px; }
+  .orbit1, .orbitTrack { inset: -18px; }
+  .orbit2 { inset: -34px; }
+  .scrollHint { display: none; }
 }
+

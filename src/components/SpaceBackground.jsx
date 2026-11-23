@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 import styles from './SpaceBackground.module.css';
-import backgroundImage from '../img/luna1.jpeg';
+import moonPhoto from '../img/luna1.jpeg';
+
+// Colores de estrellas reales: azul-blanco, blanco, y algunas cálidas.
+const STAR_TINTS = ['220,235,255', '237,244,255', '200,220,255', '255,240,215'];
 
 export default function SpaceBackground() {
   const canvasRef = useRef(null);
@@ -8,112 +11,124 @@ export default function SpaceBackground() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    let animId;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let width = 0, height = 0, dpr = 1;
+    let stars = [];
     let shootingStars = [];
-    let lastShoot = 0;
-    const bg = new Image();
-    bg.src = backgroundImage;
-    let bgReady = false;
-    bg.onload = () => {
-      bgReady = true;
-    };
+    let nextShoot = 0;
+    let animId;
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    function spawnShootingStar() {
-      const side = Math.random();
-      let x, y, angle;
-      if (side < 0.5) {
-        x = Math.random() * canvas.width * 0.6;
-        y = Math.random() * canvas.height * 0.4;
-        angle = (Math.random() * 30 + 15) * Math.PI / 180;
-      } else {
-        x = canvas.width * 0.4 + Math.random() * canvas.width * 0.6;
-        y = Math.random() * canvas.height * 0.4;
-        angle = (Math.random() * 30 + 150) * Math.PI / 180;
-      }
-      shootingStars.push({
-        x, y, angle,
-        speed: Math.random() * 14 + 10,
-        length: Math.random() * 180 + 120,
-        opacity: 1,
-        trail: [],
-        maxTrail: Math.floor(Math.random() * 14 + 10),
-        alive: true,
+    function buildStars() {
+      const count = Math.min(420, Math.round((width * height) / 4200));
+      stars = Array.from({ length: count }, () => {
+        const depth = Math.random();
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: depth * 1.1 + 0.25,
+          alpha: depth * 0.6 + 0.25,
+          twinkleSpeed: Math.random() * 0.0025 + 0.0006,
+          twinklePhase: Math.random() * Math.PI * 2,
+          parallax: depth * 0.06 + 0.01,
+          tint: STAR_TINTS[Math.random() < 0.12 ? 3 : Math.floor(Math.random() * 3)],
+        };
       });
     }
 
-    function draw(timestamp) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      buildStars();
+      if (reduceMotion) draw(0);
+    }
 
-      if (bgReady) {
-        const scale = Math.max(canvas.width / bg.width, canvas.height / bg.height);
-        const drawWidth = bg.width * scale;
-        const drawHeight = bg.height * scale;
-        const drawX = (canvas.width - drawWidth) / 2;
-        const drawY = (canvas.height - drawHeight) / 2;
+    function spawnShootingStar() {
+      const fromLeft = Math.random() < 0.5;
+      const x = fromLeft ? Math.random() * width * 0.6 : width * 0.4 + Math.random() * width * 0.6;
+      const y = Math.random() * height * 0.4;
+      const deg = fromLeft ? Math.random() * 30 + 15 : Math.random() * 30 + 135;
+      shootingStars.push({
+        x, y,
+        angle: (deg * Math.PI) / 180,
+        speed: Math.random() * 10 + 9,
+        trail: [],
+        maxTrail: Math.floor(Math.random() * 14 + 10),
+        life: 0,
+      });
+    }
 
-        ctx.drawImage(bg, drawX, drawY, drawWidth, drawHeight);
-        const overlay = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        overlay.addColorStop(0, 'rgba(13, 13, 13, 0.42)');
-        overlay.addColorStop(0.55, 'rgba(13, 13, 13, 0.58)');
-        overlay.addColorStop(1, 'rgba(13, 13, 13, 0.76)');
-        ctx.fillStyle = overlay;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      } else {
-        const bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        bgGrad.addColorStop(0, '#17120f');
-        bgGrad.addColorStop(0.45, '#0d0d0d');
-        bgGrad.addColorStop(1, '#090909');
-        ctx.fillStyle = bgGrad;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function drawStars(time) {
+      const scroll = window.scrollY;
+      for (const s of stars) {
+        const twinkle = reduceMotion ? 1 : 0.65 + 0.35 * Math.sin(time * s.twinkleSpeed + s.twinklePhase);
+        let y = (s.y - scroll * s.parallax) % height;
+        if (y < 0) y += height;
+        ctx.fillStyle = `rgba(${s.tint},${s.alpha * twinkle})`;
+        ctx.beginPath();
+        ctx.arc(s.x, y, s.r, 0, Math.PI * 2);
+        ctx.fill();
       }
+    }
 
-      // Shooting stars
-      if (timestamp - lastShoot > (Math.random() * 3000 + 2500)) {
-        spawnShootingStar();
-        lastShoot = timestamp;
-      }
-
-      shootingStars = shootingStars.filter(ss => {
+    function drawShootingStars() {
+      shootingStars = shootingStars.filter((ss) => {
         ss.x += Math.cos(ss.angle) * ss.speed;
         ss.y += Math.sin(ss.angle) * ss.speed;
+        ss.life++;
         ss.trail.unshift({ x: ss.x, y: ss.y });
         if (ss.trail.length > ss.maxTrail) ss.trail.pop();
 
+        ctx.lineCap = 'round';
         for (let i = 0; i < ss.trail.length - 1; i++) {
           const frac = 1 - i / ss.trail.length;
           ctx.beginPath();
           ctx.moveTo(ss.trail[i].x, ss.trail[i].y);
           ctx.lineTo(ss.trail[i + 1].x, ss.trail[i + 1].y);
-          ctx.strokeStyle = `rgba(180,230,255,${frac * 0.9})`;
-          ctx.lineWidth = frac * 2.2;
-          ctx.lineCap = 'round';
+          ctx.strokeStyle = `rgba(180,230,255,${frac * 0.85})`;
+          ctx.lineWidth = frac * 2;
           ctx.stroke();
         }
-
-        // Head glow
         ctx.beginPath();
-        ctx.arc(ss.x, ss.y, 2.5, 0, Math.PI * 2);
+        ctx.arc(ss.x, ss.y, 2, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(220,245,255,0.95)';
         ctx.fill();
 
-        return ss.x > -100 && ss.x < canvas.width + 100
-          && ss.y > -100 && ss.y < canvas.height + 100
-          && ss.trail.length < ss.maxTrail * 3;
+        return ss.life < 120 && ss.x > -100 && ss.x < width + 100 && ss.y > -100 && ss.y < height + 100;
       });
+    }
 
+    function draw(time) {
+      ctx.clearRect(0, 0, width, height);
+      drawStars(time);
+      if (reduceMotion) return;
+
+      if (time > nextShoot) {
+        spawnShootingStar();
+        nextShoot = time + Math.random() * 4000 + 3500;
+      }
+      drawShootingStars();
       animId = requestAnimationFrame(draw);
     }
 
     resize();
-    animId = requestAnimationFrame(draw);
+    if (!reduceMotion) animId = requestAnimationFrame(draw);
     window.addEventListener('resize', resize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', resize);
+    };
   }, []);
 
-  return <canvas ref={canvasRef} className={styles.canvas} />;
+  return (
+    <div className={styles.sky} aria-hidden="true">
+      <div className={styles.photo} style={{ backgroundImage: `url(${moonPhoto})` }} />
+      <div className={styles.veil} />
+      <canvas ref={canvasRef} className={styles.canvas} />
+    </div>
+  );
 }

@@ -4,34 +4,33 @@ import About from './components/About.jsx'
 import Skills from './components/Skills.jsx'
 import Projects from './components/Projects.jsx'
 import Contact from './components/Contact.jsx'
+import Footer from './components/Footer.jsx'
 import SpaceBackground from './components/SpaceBackground.jsx'
 import CustomCursor from './components/CustomCursor.jsx'
 import { useLang } from './hooks/useLang.js'
+
+const Divider = () => <div className="divider" aria-hidden="true" />
 
 export default function App() {
 	const { lang, setLang, t } = useLang()
 
 	return (
 		<>
+			<a href="#main" className="skip-link">{t('skip_link')}</a>
 			<SpaceBackground />
 			<CustomCursor />
 			<Navbar t={t} lang={lang} setLang={setLang} />
-			<main>
+			<main id="main">
 				<Hero t={t} />
-				<hr className="divider" />
 				<About t={t} />
-				<hr className="divider" />
+				<Divider />
 				<Skills t={t} />
-				<hr className="divider" />
+				<Divider />
 				<Projects t={t} lang={lang} />
-				<hr className="divider" />
+				<Divider />
 				<Contact t={t} />
 			</main>
-			<footer className="section-wrapper" style={{ paddingTop: '2rem', paddingBottom: '2rem', textAlign: 'center' }}>
-				<p style={{ color: 'var(--muted)', fontFamily: 'var(--font-mono)', fontSize: '.72rem', letterSpacing: '.08em' }}>
-					{t('footer_by')} Jl · {t('footer_uni')}
-				</p>
-			</footer>
+			<Footer t={t} />
 		</>
 	)
 }
