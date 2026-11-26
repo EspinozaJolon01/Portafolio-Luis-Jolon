@@ -56,10 +56,12 @@ function Constellation({ id, title, skills, index }) {
         <ul className={styles.stars}>
           {skills.map((name, i) => {
             const [x, y] = points[i];
+            // En pantallas angostas la etiqueta va a la izquierda si no cabe a la derecha
+            const narrowLeft = x + 7 + name.length * 2.3 > 100;
             return (
               <li
                 key={name}
-                className={`${styles.star} ${x > 72 ? styles.labelLeft : ''}`}
+                className={`${styles.star} ${x > 72 ? styles.labelLeft : ''} ${narrowLeft ? styles.narrowLeft : ''}`}
                 style={{ left: `${x}%`, top: `${y}%`, transitionDelay: `${i * 0.08}s` }}
               >
                 <span className={styles.dot} aria-hidden="true" />
